@@ -1,0 +1,587 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CSS Guides</title>
+
+    <link rel="stylesheet" href="css-guides.css">
+
+    <!-- GOOGLE FONTS -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Nunito+Sans:wght@200;300;400;600;700;800;900&family=Raleway:wght@100;200;300;400;500;600;700;800;900&display=swap" rel="stylesheet"> 
+
+    <!-- FONTAWESOME  -->
+    <script src="https://kit.fontawesome.com/7b8a880cb3.js" crossorigin="anonymous"></script>
+</head>
+<body>
+    <section class="flexbox">
+        <h1>Flexbox</h1>
+        <div class="container">
+            <h2>Basics</h2>
+            <ul>
+                <li><strong>main axis</strong></li>
+                <p>
+                    defined by <em>flex-direction</em>
+                </p>
+                <p>row, row-reverse | main axis is inline direction (left to right or reverse) , (x axis), row.</p>
+                <p>column, column-reverse | main axis is block direction (top to bottom or reverse), (y axis), column.</p>
+                <li><strong>cross axis</strong></li>
+                <p>perpendicular to the main axis.</p>
+                <ul>
+                    <li>flex-direction set to row, cross axis is column (y axis, block direction).</li>
+                    <li>flex-direction set to column, cross axis is row (x axis, inline direction).</li>
+                </ul>
+                <li><strong>start and end lines</strong></li>
+                <p>past bias towards writing modes, makes flexbox </p>
+                <ul>
+                    <li><em>flex-direction</em> set to <span class="span-value">row</span>, start on left, end on right.</li>
+                    <li><em>flex-direction set</em> to <span class="span-value">row-reverse</span>, start on right, end on left.</li>
+                    <li><em>flex-direction</em> set to <span class="span-value">column</span>, start on top, end on bottom.</li>
+                    <li><em>flex-direction</em> set to <span class="span-value">column-reverse</span>, start on bottom, end on top.</li>
+                </ul>
+                <li><strong>flex container (parent)</strong></li>
+                <p>defined by setting the <em>display</em> to <span class="span-value">flex</span> or <span class="span-value">inline-flex</span>.</p>
+                <p>Default Values</p>
+                <ul>
+                    <li>items display in row.</li>
+                    <li>items start from the start line of the main axis.</li>
+                    <li>items do not stretch on the main dimension, but shrink.</li>
+                    <li>items stretch to fix size of cross axis.</li>
+                    <li><em>flex-basis</em> is set to <span class="span-value">auto</span></li>
+                    <li><em>flex-wrap is set to <span class="span-value">nowrap</span></em></li>
+                    <li></li>
+                </ul>
+                <li><strong>flex item (children)</strong></li>
+                
+                <h4>available space</h4>
+                <li>left over space in the container after fitting the total items. This applies for both inline and block dimensions.</li>
+        
+                <h4>flex-grow</h4>
+                <li>items can grow along the main axis from the basis size.</li>
+                <li>growing will cause items to stretch and take up the available space or shared available space if other items also grow.</li>
+                <li>giving a positive integer like 1, means that the available space will be shared equally among items.</li>
+                <li>property used to distribute available space in proportion.</li>
+                
+                <h4>flex-shrink</h4>
+                <li>property controls how available space is taken away from items.</li>
+                <li>if the container can't fit all items, setting shrink to a positive integer will make the item to become smaller than its basis.</li>
+                <li>higher values will mean that items will shrink faster than items with lower values.</li>
+                <li>values in both shrink and grow are proportions.</li>
+               
+                <h4>flex-basis</h4>
+                <li>defines the size of an item in terms of the space it leaves as available.</li>
+                <li>default value is auto. Browser looks at the item's size (width and height).</li>
+                <li>if item doesn't have a size, the content size is used as the basis.</li>
+        
+                <h4>align-items</h4>
+                <li>will align items on the cross axis.</li>
+                
+                <h4>justify-content</h4>
+                <li>aligns items on the main axis.</li>
+                <li>there aren't properties to align individual items on the main axis.</li>
+                <li>setting the value of auto for a margin, will allow the item to take up all of the available space it can.</li>
+        
+                <h4>aliign-content</h4>
+                <li>sets the distribution of the available space alont the cross axis</li>
+                <li>has no effect on single line containers (set with nowrap)</li>
+                <li>its for containers with multiple lines.</li>
+                
+                <h4>gap</h4>
+                <li>sets the gap between rows and columns.</li>
+                <li>shorthand for row-gap and column-gap</li>
+                
+                <h4>order</h4>
+                <li>lay items out in ordinal groups.</li>
+                <li>items are assigned an integer representing their group.</li>
+                <li>lowest value integer goes first in the group. (ex.1)</li>
+                <li>flex values have a default order of 0.</li>
+                <li>using a negative integer will ensure that item will always be displayed first.</li>
+                <li>order, just like flow-direction, change the item's display but not the sequential navitagion of them.</li>
+                <li>if you change the visual order, the logical order should also be changed to mirror the behavior.</li>
+                <li>never try to modify the visual order to fix issues with the source.</li>
+                <li>usueful situations when visual and logical order are disconnected.</li>
+        
+                <ul>
+                    <li>dates showing on top of a card but screen reader reading the title first and then the date.</li>
+                </ul>
+                <li></li>
+            </ul>
+        </div>
+        <div class="container">
+            <h2>container properties</h2>
+            <div class="flex-shorthand">
+                <h3><a href="https://developer.mozilla.org/en-US/docs/Web/CSS/flex-flow">flex-flow (shorthand)</a></h3>
+                <table>
+                    <tr>
+                        <th>flex-direction</th>
+                        <td>sets how flex items are placed in the container defining the main axis and direction.</td>
+                    </tr>
+                    <tr>
+                        <th>flex-wrap</th>
+                        <td>sets wether items are forced onto one line or can wrap onto multiple lines.</td>
+                    </tr>
+                </table>
+            </div>
+            <div class="flex-direction">
+                <h3><a href="https://developer.mozilla.org/en-US/docs/Web/CSS/flex-direction">flex-direction</a></h3>
+                <ul class="values">
+                    <div class="flex-container">
+                        <div>
+                            <li><span>row</span></li>
+                            <li>row-reverse</li>
+                        </div>
+                        <div>
+                            <li>inline-direction. start/end lines left/right (ltr mode).</li>
+                            <li>inline-direction. start/end lines right/left (rtl mode).</li>
+                        </div>
+        
+                    </div>
+                    <div class="flex-container">
+                        <div>
+                            <li>column</li>
+                            <li>column-reverse</li>
+                        </div>
+                        <div>
+                            <li>block-direction, start/end lines top/bottom.</li>
+                            <li>block-direction, start/end lines bottom/top.</li>
+                        </div>
+        
+                    </div>
+                </ul>
+            </div>
+            <div class="flex-wrap">
+                <h3><a href="https://developer.mozilla.org/en-US/docs/Web/CSS/flex-wrap">flex-wrap</a></h3>
+                <ul class="values">
+                    <div class="flex-container">
+                        <div>
+                            <li><span>nowrap</span></li>
+                            <li>wrap</li>
+                            <li>wrap-reverse</li>
+                        </div>
+                        <div>
+                            <li>Items laid out in a single line. May cause overflow. </li>
+                            <li>Items break into multiple lines. Cross-start equivalent to start or before.</li>
+                            <li>Behaves as wrap</li>
+                        </div>
+        
+                    </div>
+                </ul>
+            </div>
+            <div class="flex-align-items">
+                <h3><a href="https://developer.mozilla.org/en-US/docs/Web/CSS/align-items">Align Items</a></h3>
+                <table>
+                    <tr>
+                        <th colspan="2">Keywords</th>
+                    </tr>
+                    <tr>
+                        <th>normal</th>
+                        <td>for flex items the keyword behaves as stretch.</td>
+                    </tr>
+                    <tr>
+                        <th>stretch</th>
+                        <td>flex items are stretched such that the cross-size is the same as the line while respecting width and height.</td>
+                    </tr>
+                    <tr>
+                        <th colspan="2">Positional Alignment</th>
+                    </tr>
+                    <tr>
+                        <th>center</th>
+                    </tr>
+                    <tr>
+                        <th>start</th>
+                    </tr>
+                    <tr>
+                        <th>end</th>
+                    </tr>
+                    <tr>
+                        <th>flex-start</th>
+                    </tr>
+                    <tr>
+                        <th>flex-end</th>
+                    </tr>
+                    <tr>
+                        <th colspan="2">baseline alignment</th>
+                    </tr>
+                    <tr>
+                        <th>baseline</th>
+                    </tr>
+                    <tr>
+                        <th>first baseline</th>
+                    </tr>
+                    <tr>
+                        <th>last baseline</th>
+                    </tr>
+                    <tr>
+                        <th>safe center</th>
+                    </tr>
+                    <tr>
+                        <th>unsafe center</th>
+                    </tr>
+                </table>
+            </div>
+            <div class="flex-justify-content">
+                <h3><a href="https://developer.mozilla.org/en-US/docs/Web/CSS/justify-content">Justify Content</a></h3>
+                <table>
+                        <th colspan="2">Positional Alignment</th>
+                    </tr>
+                    <tr>
+                        <th>center</th>
+                        <td>items packed towards the center along the main axis.</td>
+                    </tr>
+                    <tr>
+                        <th>start</th>
+                        <td>items are packed towards the start edge of the main axis.</td>
+                    </tr>
+                    <tr>
+                        <th>end</th>
+                        <td>items are packed towards the end edge of the main axis.</td>
+                    </tr>
+                    <tr>
+                        <th>flex-start</th>
+                        <td>only applies to flex layout items.</td>
+                    </tr>
+                    <tr>
+                        <th>flex-end</th>
+                        <td>only applies to flex layout items.</td>
+                    </tr>
+                    <tr>
+                        <th>left</th>
+                        <td>items packed towards the left edge.</td>
+                    </tr>
+                    <tr>
+                        <th>right</th>
+                        <td>items packed towards the right edge.</td>
+                    </tr>
+                    <tr>
+                        <th colspan="2">baseline alignment (none)</th>
+                    </tr>
+                    <tr>
+                        <th colspan="2">normal alignment</th>
+                    </tr>
+                    <tr>
+                        <th>normal</th>
+                        <td>default position, it behaves as stretch.</td>
+                    </tr>
+                    <tr>
+                        <th colspan="2">distributed alignment</th>
+                    </tr>
+                    <tr>
+                        <th>space-between</th>
+                    </tr>
+                    <tr>
+                        <th>space-around</th>
+                    </tr>
+                    <tr>
+                        <th>space-evenly</th>
+                    </tr>
+                    <tr>
+                        <th>stretch</th>
+                    </tr>
+                    <tr>
+                        <th colspan="2">overflow alignment</th>
+                    </tr>
+                    <tr>
+                        <th>safe center</th>
+                    </tr>
+                    <tr>
+                        <th>unsafe center</th>
+                    </tr>
+        
+                </table>
+            </div>
+            <div class="flex-align-content">
+                <h3><a href="https://developer.mozilla.org/en-US/docs/Web/CSS/align-content">align-content</a></h3>
+                <table>
+                        <th colspan="2">Positional Alignment</th>
+                    </tr>
+                    <tr>
+                        <th>center</th>
+                        <td>items packed towards the center along the main axis.</td>
+                    </tr>
+                    <tr>
+                        <th>start</th>
+                        <td>items are packed towards the start edge of the main axis.</td>
+                    </tr>
+                    <tr>
+                        <th>end</th>
+                        <td>items are packed towards the end edge of the main axis.</td>
+                    </tr>
+                    <tr>
+                        <th>flex-start</th>
+                        <td>only applies to flex layout items.</td>
+                    </tr>
+                    <tr>
+                        <th>flex-end</th>
+                        <td>only applies to flex layout items.</td>
+                    </tr>
+                    <tr>
+                        <th>left</th>
+                        <td>items packed towards the left edge.</td>
+                    </tr>
+                    <tr>
+                        <th>right</th>
+                        <td>items packed towards the right edge.</td>
+                    </tr>
+                    <tr>
+                        <th colspan="2">baseline alignment</th>
+                    </tr>
+                    <tr>
+                        <th>baseline</th>
+                    </tr>
+                    <tr>
+                        <th>first baseline</th>
+                    </tr>
+                    <tr>
+                        <th>last baseline</th>
+                    </tr>
+                    <tr>
+                        <th colspan="2">normal alignment</th>
+                    </tr>
+                    <tr>
+                        <th>normal</th>
+                        <td>default position, it behaves as stretch.</td>
+                    </tr>
+                    <tr>
+                        <th colspan="2">distributed alignment</th>
+                    </tr>
+                    <tr>
+                        <th>space-between</th>
+                    </tr>
+                    <tr>
+                        <th>space-around</th>
+                    </tr>
+                    <tr>
+                        <th>space-evenly</th>
+                    </tr>
+                    <tr>
+                        <th>stretch</th>
+                    </tr>
+                    <tr>
+                        <th colspan="2">overflow alignment</th>
+                    </tr>
+                    <tr>
+                        <th>safe center</th>
+                    </tr>
+                    <tr>
+                        <th>unsafe center</th>
+                    </tr>
+        
+                </table>
+            </div>
+            <!-- like justify-content (for multiple items) -->
+        
+            <div class="flex-gap">
+                <h3><a href="https://developer.mozilla.org/en-US/docs/Web/CSS/gap">gap</a></h3>
+                <table>
+                    <tr>
+                        <th>length</th>
+                        <td>any css length (absolute, relative). one value, two values, combined values with percentage.</td>
+                    </tr>
+                    <tr>
+                        <th>percentage</th>
+                        <td>one value, two values, combined values with length</td>
+                    </tr>
+                    <tr>
+                        <th>calc()</th>
+                        <td>calc functions.</td>
+                    </tr>
+                </table>
+            </div>
+            <h2>item properties</h2>
+            <div class="flex-flex">
+                <h3><a href="https://developer.mozilla.org/en-US/docs/Web/CSS/flex">flex (shorthand)</a></h3>
+                <table>
+                    <tr>
+                        <th>flex-grow</th>
+                        <td>sets the grow factor of an item's main size. Proportion. </td>
+                    </tr>
+                    <tr>
+                        <th>flex-shrink</th>
+                        <td>sets the shrink factor of an item's main size. Proportion. </td>
+                    </tr>
+                    <tr>
+                        <th>flex-basis</th>
+                        <td>sets the initial size of an item. Affected by box-sizing.</td>
+                    </tr>
+                    <tr>
+                        <th colspan="2">keywords</th>
+                    </tr>
+                    <tr>
+                        <th rowspan="2">initial</th>
+                        <td>item is sized according to its width and height properties. 0 1 auto.</td>
+                    </tr>
+                    <tr>
+                        <td>it shrinks to min size to fit container but doesn't grow to fit available space.</td>
+                    </tr>
+                    <tr>
+                        <th>auto</th>
+                        <td>item sized according to width and height properties, but it grows. 1 1 auto.</td>
+                    </tr>
+                    <tr>
+                        <th>none</th>
+                        <td>item sized according to width and height but it's inflexible. Doesn't grow or shrink. 0 0 auto.</td>
+                    </tr>
+                    <tr>
+                        <th></th>
+                        <th>one value</th>
+                        <th>two value</th>
+                        <th>three value</th>
+                    </tr>
+                    <tr>
+                        <th>number</th>
+                        <td>number 1 0</td>
+                        <td rowspan="2">numbers are interpreted as grow and shrink, second value has to be a number or width.</td>
+                        <td rowspan="2">grow, shrink, basis</td>
+                    </tr>
+                    <tr>
+                        <th>width</th>
+                        <td>1 1 width</td>
+                    </tr>
+                </table>
+            </div>
+            <div class="flex-grow">
+                <h3><a href="https://developer.mozilla.org/en-US/docs/Web/CSS/flex-grow">flex-grow</a></h3>
+                <table>
+                    <tr>
+                        <th rowspan="3">number value</th>
+                        <td>it's a ratio related to the shrink and basis properties.</td>
+                    </tr>
+                    <tr>
+                        <td>can't be negative.</td>
+                    </tr>
+                    <tr>
+                        <td>default is <span class="span">0</span></td>
+                    </tr>
+                </table>
+            </div>
+            <div class="flex-shrink">
+                <h3><a href="https://developer.mozilla.org/en-US/docs/Web/CSS/flex-shrink">flex-shrink</a></h3>
+                <table>
+                    <tr>
+                        <th rowspan="3">number value</th>
+                        <td>it's a ratio related to the shrink and basis properties.</td>
+                    </tr>
+                    <tr>
+        
+                        <td>can't be negative.</td>
+                    </tr>
+                    <tr>
+        
+                        <td>default is <span class="span">0</span></td>
+                    </tr>
+                </table>
+            </div>
+            <div class="flex-basis">
+                <h3><a href="https://developer.mozilla.org/en-US/docs/Web/CSS/flex-basis">flex-basis</a></h3>
+                <ul class="values">
+                    <p><strong>Width</strong></p>
+                    <div class="flex-container">
+                        <div>
+                            <li>length</li>
+                        </div>
+                        <div>
+                            <li>relative <strong>cap, ch, em, ex, ic, lh, rem, rlh, sv, lv, dv, vh, vw, vmax, vmin, vb, vi</strong></li>
+                            <li>absolute <strong>px, cm, mm, q, in, pc, pt</strong></li>
+                        </div>
+        
+                    </div>
+                    <div class="flex-container">
+                        <div>
+                            <li>percentage</li>
+                            <li><span>auto</span></li>
+                        </div>
+                        <div>
+                            <li>any percentage equal or less of the element's parent.</li>
+                            <li>follows the width and the height of the properties of the element.<strong></strong></li>
+                        </div>
+        
+                    </div>
+                    <p><strong>Intrinsic sizing keywords</strong></p>
+                    <div class="flex-container">
+                        <div>
+                            <li>fill</li>
+                            <li>max-content</li>
+                            <li>min-content</li>
+                            <li>fit-content</li>
+                        </div>
+                        <div>
+                        </div>
+        
+                    </div>
+                    <p><strong>Sized based on item's content</strong></p>
+                    <div class="flex-container">
+                        <div>
+                            <li>content</li>
+                        </div>
+                        <div>
+                            <li>automatic sizing based on the item's content.</li>
+                        </div>
+        
+                    </div>
+                </ul>
+            </div>
+            <div class="flex-align-self">
+                <h3><a href="https://developer.mozilla.org/en-US/docs/Web/CSS/align-self">Align-self</a></h3>
+                <table>
+                    <tr>
+                        <th colspan="2">Keywords</th>
+                    </tr>
+                    <tr>
+                        <th>normal</th>
+                        <td>for flex items the keyword behaves as stretch.</td>
+                    </tr>
+                    <tr>
+                        <th>auto</th>
+                        <td>computes to the parent's align-items</td>
+                    </tr>
+                    <tr>
+                        <th colspan="2">Positional Alignment</th>
+                    </tr>
+                    <tr>
+                        <th>center</th>
+                    </tr>
+                    <tr>
+                        <th>start</th>
+                    </tr>
+                    <tr>
+                        <th>end</th>
+                    </tr>
+                    <tr>
+                        <th>flex-start</th>
+                    </tr>
+                    <tr>
+                        <th>flex-end</th>
+                    </tr>
+                    <tr>
+                        <th colspan="2">baseline alignment</th>
+                    </tr>
+                    <tr>
+                        <th>baseline</th>
+                    </tr>
+                    <tr>
+                        <th>first baseline</th>
+                    </tr>
+                    <tr>
+                        <th>last baseline</th>
+                    </tr>
+                    <tr>
+                        <th>safe center</th>
+                    </tr>
+                    <tr>
+                        <th>unsafe center</th>
+                    </tr>
+                </table>
+            </div>
+        </div>
+    </section>
+    <section class="grid">
+        <h2>Grid</h2>
+        <div class="container">
+            <h2>basics</h2>
+        </div>  
+    </section>
+</body>
+</html>
