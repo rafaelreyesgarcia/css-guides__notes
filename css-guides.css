@@ -45,8 +45,25 @@ p, li {
     color: hsl(var(--clr-dark-light));
 }
 
+p {
+    margin-block: 0;
+}
+
 li {
+    list-style-type: square;
+}
+
+li.header {
     list-style-type: none;
+    font-weight: var(--fw-bold);
+}
+
+li.description {
+    list-style-type: none;
+}
+
+.nested {
+    list-style-type: circle;
 }
 
 /* TEMPLATES */
@@ -74,6 +91,10 @@ span {
 .flex-container {
     display: flex;
     gap: 2rem;
+}
+
+.flex-header {
+    justify-content: center;
 }
 
 table {
