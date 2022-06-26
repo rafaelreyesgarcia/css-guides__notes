@@ -615,60 +615,10 @@
                     </div>
                 </ul>
             </div>
-            <div class="flex-align-self">
-                <h3><a href="https://developer.mozilla.org/en-US/docs/Web/CSS/align-self">Align-self</a></h3>
-                <table>
-                    <tr>
-                        <th colspan="2">Keywords</th>
-                    </tr>
-                    <tr>
-                        <th>normal</th>
-                        <td>for flex items the keyword behaves as stretch.</td>
-                    </tr>
-                    <tr>
-                        <th>auto</th>
-                        <td>computes to the parent's align-items</td>
-                    </tr>
-                    <tr>
-                        <th colspan="2">Positional Alignment</th>
-                    </tr>
-                    <tr>
-                        <th>center</th>
-                    </tr>
-                    <tr>
-                        <th>start</th>
-                    </tr>
-                    <tr>
-                        <th>end</th>
-                    </tr>
-                    <tr>
-                        <th>flex-start</th>
-                    </tr>
-                    <tr>
-                        <th>flex-end</th>
-                    </tr>
-                    <tr>
-                        <th colspan="2">baseline alignment</th>
-                    </tr>
-                    <tr>
-                        <th>baseline</th>
-                    </tr>
-                    <tr>
-                        <th>first baseline</th>
-                    </tr>
-                    <tr>
-                        <th>last baseline</th>
-                    </tr>
-                    <tr>
-                        <th>safe center</th>
-                    </tr>
-                    <tr>
-                        <th>unsafe center</th>
-                    </tr>
-                </table>
-            </div>
+            
         </div>
     </section>
+
     <section class="grid">
         <h2>Grid</h2>
         <div class="container">
@@ -691,6 +641,9 @@
                 <h4>grid container</h4>
                 <li>set with display:grid or display: inline-grid</li>
                 <li>direct children of the container element (parent) become grid items.</li>
+                <li><strong>grid-template-areas</strong> and <strong>grid-template-rows(columns)</strong> are used on the container</li>
+                <li>the full stop character " . " can leave grid cells empty.</li>
+                <li>each grid area spans multiple grid cells by repeating the name of the grid area.</li>
 
                 <h4>grid tracks</h4>
                 <li>space between any two lines on the grid. Defined with the <strong>grid-template-row</strong> and <strong>grid-template-column</strong> properties applied on the container.
@@ -710,8 +663,11 @@
                 <h4>grid lines</h4>
                 <li>lines are numbered according to the writing mode of the document.</li>
                 <li>lines can be named.</li>
+                <li>indexed from 1.</li>
                 <li><strong>grid-column(row)-start</strong> and <strong>grid-column(row)-end</strong> define the start and end lines of an item.</li>
                 <li><strong>grid-column</strong> and <strong>grid-row</strong> are shorthands for start line / end line.</li>
+                <li>Default is spanning one track. Defining the end line is not necessary if item spans only one track.</li>
+                <li>span keyword specifies how many tracks an area will span.</li>
 
                 <h4>grid cells</h4>
                 <li>smallest unit on the grid.</li>
@@ -720,12 +676,16 @@
                 <h4>grid areas</h4>
                 <li>when items span one or more cells both by row or column.</li>
                 <li>areas can only be rectangular, not l-shaped.</li>
+                <li>block-start, block-end, inline-start, inline-end</li>
+                <li>counting backwards is possible with a negative integer. The final line is from the explicit grid.</li>
 
                 <h4>gutters</h4>
                 <li>also called alleys, are gaps created between grid cells with the <strong>column-gap</strong> and <strong>row-gap</strong> or shorthand <strong>gap</strong>.</li>
                 <li>grid first version prefixed the properties with grid. Old safe versions <strong>grid-column-gap grid-row-gap grid-gap</strong></li>
                 <li>space used by gaps is taken into account before assigning fractions to tracks.</li>
                 <li>the gap acts like a thick line separating tracks. Nothing can be placed in them.</li>
+                <li>gaps only appear between tracks, they don't add space to the top, bottom, right or left of the container.</li>
+                <li>gaps act as if the line has gained extra width.</li>
 
                 <h4>nesting grids</h4>
                 <li>a grid item can become a grid container.</li>
@@ -734,6 +694,32 @@
 
                 <h4>layering items</h4>
                 <li><strong>z-index</strong> property allows us to control the order in which overlapping items stack.</li>
+
+                <h4>box alignment in grid layout</h4>
+                <li>aligning items is done in the block axis and inline axis.</li>
+                <li><strong>align-self</strong> and <strong>align-items</strong> control alignment on the block axis.</li>
+                <li>items with an intrinsic aspect ratio behave as start instead of default stretch.</li>
+                <li><strong>justify-items</strong> and <strong>justify-self</strong> align items on the inline axis. These can't be implemented in flexbox, instead it uses the <strong>justify-content</strong> property</li>
+                <li><strong>place-items</strong> and <strong>place-self</strong> are shorthands.</li>
+                <li>aligning the grid tracks can be done with <strong>align-content</strong> for block axis and <strong>justify-content</strong> for inline axis.</li>
+                <li>auto margin techiques can be applied to items.</li>
+                <li>the logical properties specification allows to use physical properties (top, right, bottom, left) as inline or block.</li>
+
+                <h4>progressive enhancements</h4>
+                <li>feature queries (@supports) check if a css property is supported by the browser, if it does, it runs the code, if it doesn't, an old technique like floats is used.</li>
+
+                <h4>subgrid</h4>
+                <li>setting the value of <strong>subgrid</strong> on <strong>grid-template-columns(rows)</strong> on an item, allows nested grids to have tracks the same size of the parent.</li>
+                <li>gaps are inherited but can be overriden.</li>
+                <li>line names are passed down from the parent, but the subgrid can declare its own line names.</li>
+                <li>line numbering restarts in the subgrid.</li>
+                <li>both rows and columns can be defined as subgrid in the nested grid.</li>
+                <li>there's no implicit grid in subgrids.</li>
+
+                <h4>masonry layout</h4>
+                <li>value set for <strong>grid-template-columns(rows)</strong></li>
+                <li>layout consists of one grid axis (column), and one masonry axis (rows) where items rise up to fill gaps.</li>
+                <li><strong>align-tracks (block) justify-tracks (inline) masonry-auto-flow</strong> are properties to control the masonry axis.</li>
 
                 <h4>useful tips</h4>
                 <li><strong>auto-fill</strong> keyword can replace the integer value in repeat notation to create as many column or row tracks as will fit.
@@ -744,10 +730,55 @@
                 <li>If the grid container doesn't define the relative position, the item will be absolutely positioned to the viewport. The grid item won't participate in grid layout in this case.</li>
                 <li>A grid area can also have a relative position so a nested item can be absolutely positioned to that area. </li>
                 <li><strong>display: contents</strong> removes the box an item would normally create and the boxes of the child elements rise up a level. Auto placement rules apply to these child elements. Short term solution for what subgrids are solving.</li>
+                <li>The grid can change with media queries. Start with a mobile grid (single column) and expand the columns as the width of the viewport gets wider.</li>
+                <li>main usecase of grid is to create layouts, but it can also be useful for UI elements.</li>
+                <li>shorthands are useful but if properties aren't or can't be set in the shorthand, they will be reset to initial values.</li>
+                <li>grid-template shorthand sets the explicit grid, and the grid shorthand sets both the explicit and implicit grid.</li>
+                <li>naming grid lines inside square brackets is done in grid-template-rows(columns).</li>
+                <li>naming grid lines multiple names as they might refer to the start or the end of an area.</li>
+                <li>repeat( ) can create multiple grid lines of the same name. addressing different lines is done with an integer.</li>
+                <li>auto-placement usecases can be useful when items don't have a logical order.</li>
             </ul>
         </div>  
         <div class="container">
             <h2>properties</h2>
+
+            <div class="grid-shorthand">
+                <h3>
+                    <a href="https://developer.mozilla.org/en-US/docs/Web/CSS/grid">grid (shorthand)</a>
+                </h3>
+                <table>
+                    <tr>
+                        <th>grid-auto-columns</th>
+                    </tr>
+                    <tr>
+                        <th>grid-auto-flow</th>
+                    </tr>
+                    <tr>
+                        <th>grid-auto-rows</th>
+                    </tr>
+                    <tr>
+                        <th>grid-template-areas</th>
+                    </tr>
+                    <tr>
+                        <th>grid-template-rows</th>
+                    </tr>
+                    <tr>
+                        <th>grid-template-columns</th>
+                    </tr>
+                </table>
+            </div>
+
+            <div class="grid-template">
+                <h3>
+                    <a href="https://developer.mozilla.org/en-US/docs/Web/CSS/grid-template">grid-template (shorthand)</a>
+                </h3>
+                <table>
+                    <tr>
+                        <th>grid-template-areas grid-template-rows / grid-template-columns</th>
+                    </tr>
+                </table>
+            </div>
 
             <div class="grid-template-rows">
                 <h3 class="flex-container flex-header">
@@ -760,60 +791,80 @@
                         <a href="https://developer.mozilla.org/en-US/docs/Web/CSS/grid-auto-columns">grid-auto-columns</a> <br>
                     </div>
                 </h3>
+                <ul class="grid-container">
+                    <li class="header">none</li>
+                    <li class="description">No explicit grid. Rows will be implicitly generated and size determined by <strong>grid-auto-rows</strong>.</li>
+                    
+                    <li class="header">[linename]</li>
+                    <li class="description">custom-ident defining a name for lines. Multiple lines can be separated by a space.</li>
+                    
+                    <li class="header">length</li>
+                    <li class="description">non-negative length.</li>
+
+                    <li class="header">percentage</li>
+                    <li class="description">value relative to the block size of the container.  </li>
+
+                    <li class="header">flex</li>
+                    <li class="description">
+                        dimension described with fr.
+                        flex sized tracks take the available space in proportion to the flex factor.
+                    </li>
+
+                    <li class="header">max-content</li>
+                    <li class="description">largest maximal content of the items.</li>
+
+                    <li class="header">min-content</li>
+                    <li class="description">largest minimal content of the items.</li>
+
+                    <li class="header">minmax (min, max)</li>
+                    <li class="description">defines a size range, greater than or equat to min, and less than or equal to max.</li>
+
+                    <li class="header">auto</li>
+                    <li class="description">
+                        represents min max content.
+                        only an auto track can be stretched by align-content and justify-content.
+                    </li>
+
+                    <li class="header">fit-content</li>
+                    <li class="description">represents min(max-content, max(auto, argument))</li>
+
+                    <li class="header">masonry</li>
+                    <li class="description">indicates that the axis should be laid out according to the masonry algorithm.</li>
+
+                    <li class="header">subgrid</li>
+                    <li class="description">the grid will adopt the spanned portion of its parent grid in an axis.</li>
+                </ul>
+            </div>
+
+            <div class="grid-auto-flow">
+                <h3>
+                    <a href="https://developer.mozilla.org/en-US/docs/Web/CSS/grid-auto-flow">grid-auto-flow</a>
+                </h3>
                 <table>
                     <tr>
-                        <th>none</th>
-                        <td>No explicit grid. Rows will be implicitly generated and size determined by <strong>grid-auto-rows</strong>.</td>
+                        <th>row</th>
+                        <td>items are placed by filling each row in turn.</td>
                     </tr>
                     <tr>
-                        <th>[linename]</th>
-                        <td>custom-ident defining a name for lines. Multiple lines can be separated by a space.</td>
+                        <th>column</th>
+                        <td>items are placed by filling each column in turn.</td>
                     </tr>
                     <tr>
-                        <th>length</th>
-                        <td>non-negative length.</td>
+                        <th>dense</th>
+                        <td>dense packing algorithm fills in holes earlier in the grid. Ommited and the sparse algorithm is used.</td>
                     </tr>
+                </table>
+            </div>
+
+            <div class="grid-template-areas">
+                <h3>
+                    <a href="https://developer.mozilla.org/en-US/docs/Web/CSS/grid-template-areas">grid-template-areas (shorthand)</a>
+                </h3>
+                <table>
                     <tr>
-                        <th>percentage</th>
-                        <td>value relative to the block size of the container.  
-                        </td>
+                        <th>string values</th>
+                        <td>A row is created for every separate string listed. A column is created for each cell in the string.</td>
                     </tr>
-                    <tr>
-                        <th>flex</th>
-                        <td>dimension described with fr.
-                            flex sized tracks take the available space in proportion to the flex factor.
-                        </td>
-                    </tr>
-                    <tr>
-                        <th>max-content</th>
-                        <td>largest maximal content of the items.</td>
-                    </tr>
-                    <tr>
-                        <th>min-content</th>
-                        <td>largest minimal content of the items.</td>
-                    </tr>
-                   <tr>
-                    <th> minmax (min, max)</th>
-                    <td>defines a size range, greater than or equat to min, and less than or equal to max.</td>
-                   </tr>
-                   <tr>
-                    <th>auto</th>
-                    <td>represents min max content.
-                        only an auto track can be stretched by align-content and justify-content.
-                    </td>
-                   </tr>
-                   <tr>
-                    <th>fit-content</th>
-                    <td>represents min(max-content, max(auto, argument))</td>
-                   </tr>
-                   <tr>
-                    <th>masonry</th>
-                    <td>indicates that the axis should be laid out according to the masonry algorithm.</td>
-                   </tr>
-                   <tr>
-                    <th>subgrid</th>
-                    <td>the grid will adopt the spanned portion of its parent grid in an axis.</td>
-                   </tr>
                 </table>
             </div>
 
@@ -859,6 +910,31 @@
                 </table>
             </div>
 
+            <div class="grid-area">
+                <h3>
+                    <a href="https://developer.mozilla.org/en-US/docs/Web/CSS/grid-area">grid-area (shorthand)</a>
+                </h3>
+                <table>
+                    <tr>
+                        <th>grid-row-start</th>
+                        <td></td>
+                    </tr>
+                    <tr>
+                        <th>grid-column-start</th>
+                        <td></td>
+                    </tr>
+                    <tr>
+                        <th>grid-row-end</th>
+                        <td>
+                        </td>
+                    </tr>
+                    <tr>
+                        <th>grid-column-end</th>
+                        <td></td>
+                    </tr>
+                </table>
+            </div>
+
             <div class="grid-gap">
                 <h3>
                     <a href="https://developer.mozilla.org/en-US/docs/Web/CSS/gap">gap (shorthand)</a> <br>
@@ -896,6 +972,209 @@
                     <tr>
                         <th>percentage</th>
                         <td>defined as a percentage relative to the size of the element. Value must be non-negative.</td>
+                    </tr>
+                </table>
+            </div>
+
+            <div class="place-items">
+                <h3>
+                    <a href="https://developer.mozilla.org/en-US/docs/Web/CSS/place-items">place-items (shorthand)</a>
+                </h3>
+                <table>
+                    <tr>
+                        <th>align-items</th>
+                    </tr>
+                    <tr>
+                        <th>justify-items</th>
+                    </tr>
+                </table>
+            </div>
+
+            <div class="place-self">
+                <h3>
+                    <a href="https://developer.mozilla.org/en-US/docs/Web/CSS/place-self">place-self (shorthand)</a>
+                </h3>
+                <table>
+                    <tr>
+                        <th>align-self</th>
+                    </tr>
+                    <tr>
+                        <th>justify-self</th>
+                    </tr>
+                </table>
+            </div>
+
+            <div class="grid-alignment">
+                <h3 class="flex-container flex-header">
+                    <div>
+                        <a href="https://developer.mozilla.org/en-US/docs/Web/CSS/align-items">align-items</a> <br>
+                        <a href="https://developer.mozilla.org/en-US/docs/Web/CSS/align-self">align-self</a> <br>
+                    </div>
+                    <div>
+                        <a href="https://developer.mozilla.org/en-US/docs/Web/CSS/justify-items">justify-items</a> <br>
+                        <a href="https://developer.mozilla.org/en-US/docs/Web/CSS/justify-self">justify-self</a> <br>
+                    </div>
+                </h3>
+                <table>
+                   <tr>
+                    <th>auto</th>
+                   </tr>
+                   <tr>
+                    <th>normal</th>
+                   </tr>
+                   <tr>
+                    <th>start</th>
+                   </tr>
+                   <tr>
+                    <th>end</th>
+                   </tr>
+                   <tr>
+                    <th>center</th>
+                   </tr>
+                   <tr>
+                    <th>stretch</th>
+                   </tr>
+                   <tr>
+                    <th>baseline</th>
+                   </tr>
+                   <tr>
+                    <th>first baseline</th>
+                   </tr>
+                   <tr>
+                    <th>last baseline</th>
+                   </tr>
+                </table>
+            </div>
+
+            <div class="place-content">
+                <h3>
+                    <a href="https://developer.mozilla.org/en-US/docs/Web/CSS/place-content">place-content (shorthand)</a>
+                </h3>
+                <table>
+                    <tr>
+                        <th>align-content</th>
+                    </tr>
+                    <tr>
+                        <th>justify-content</th>
+                    </tr>
+                </table>
+            </div>
+
+            <div class="align-justify">
+                <h3>
+                    <a href="https://developer.mozilla.org/en-US/docs/Web/CSS/align-content">align-content</a> <br>
+                    <a href="https://developer.mozilla.org/en-US/docs/Web/CSS/justify-content">justify-content</a>
+                </h3>
+                <table>
+                    <tr>
+                        <th>normal</th>
+                    </tr>
+                    <tr>
+                        <th>start</th>
+                    </tr>
+                    <tr>
+                        <th>end</th>
+                    </tr>
+                    <tr>
+                        <th>center</th>
+                    </tr>
+                    <tr>
+                        <th>stretch</th>
+                    </tr>
+                    <tr>
+                        <th>space-around</th>
+                    </tr>
+                    <tr>
+                        <th>space-between</th>
+                    </tr>
+                    <tr>
+                        <th>space-evenly</th>
+                    </tr>
+                    <tr>
+                        <th>baseline</th>
+                    </tr>
+                    <tr>
+                        <th>first baseline</th>
+                    </tr>
+                    <tr>
+                        <th>last baseline</th>
+                    </tr>
+                </table>
+            </div>
+
+            <div class="masonry-auto-flow">
+                <h3>
+                    <a href="https://developer.mozilla.org/en-US/docs/Web/CSS/masonry-auto-flow">masonry-auto-flow</a>
+                </h3>
+                <table>
+                    <tr>
+                        <th>pack</th>
+                        <td>items will be placed into the track with the most room.</td>
+                    </tr>
+                    <tr>
+                        <th>next</th>
+                        <td>items are placed one after the other in the grid axis.</td>
+                    </tr>
+                    <tr>
+                        <th>ordered</th>
+                        <td>ignore any items with definite placement, places items to order-modified document order.</td>
+                    </tr>
+                    <tr>
+                        <th>definite-first</th>
+                        <td>placing items with a definite place first before placing other items.</td>
+                    </tr>
+                    <tr>
+                        <th>next ordered</th>
+                        <td>a combination of next and ordered values.</td>
+                    </tr>
+                </table>
+            </div>
+
+            <div class="justify-tracks align-tracks">
+                <h3>
+                    <a href="https://developer.mozilla.org/en-US/docs/Web/CSS/justify-tracks">justify-tracks</a> <br>
+                    <a href="https://developer.mozilla.org/en-US/docs/Web/CSS/align-tracks">align-tracks</a>
+                </h3>
+                <table>
+                    <tr>
+                        <th>start</th>
+                        <td>items flush toward the start of the edge in the masonry axis.</td>
+                    </tr>
+                    <tr>
+                        <th>end</th>
+                        <td>items flush towards the end of the edge in the masorny axis.</td>
+                    </tr>
+                    <tr>
+                        <th>center</th>
+                        <td>items flush towards the center of the masonry axis.</td>
+                    </tr>
+                    <tr>
+                        <th>normal</th>
+                        <td>acts as start.</td>
+                    </tr>
+                    <tr>
+                        <th>space-between</th>
+                        <td>space between each adjacent items is the same.</td>
+                    </tr>
+                    <tr>
+                        <th>space-around</th>
+                        <td>the empty space before the first and after the last item equals half of the space between each adjacent items.</td>
+                    </tr>
+                    <tr>
+                        <th>space-evenly</th>
+                        <td>all space is exactly the same.</td>
+                    </tr>
+                    <tr>
+                        <th>stretch</th>
+                        <td>items stretch along the masonry axis to fill the content box.</td>
+                    </tr>
+                    <tr>
+                        <th>left</th>
+                        <td>items flush toward the left edge.</td>
+                    </tr>
+                    <tr>
+                        <th>right</th>
+                        <td>items flush toward the right edge.</td>
                     </tr>
                 </table>
             </div>
