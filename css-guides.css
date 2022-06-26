@@ -88,6 +88,8 @@ span {
     background-color: hsl(var( --clr-lighter));
 }
 
+/* Flex Layout */
+
 .flex-container {
     display: flex;
     gap: 2rem;
@@ -96,6 +98,8 @@ span {
 .flex-header {
     justify-content: center;
 }
+
+/* Table Layout */
 
 table {
     background-color: hsl(var( --clr-lighter));
@@ -106,4 +110,20 @@ table {
 
 td {
     margin-left: 4rem;
+}
+
+/* Grid layout */
+
+.grid-container {
+    display: grid;
+    grid-template-columns: 20% 80%;
+    grid-template-rows: auto;
+    grid-template-areas: "header description";
+    row-gap: 0.4em;
+
+
+    background-color: hsl(var( --clr-lighter));
+    width: 80%;
+    margin: 1em auto;
+
 }
